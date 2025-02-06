@@ -1,12 +1,14 @@
+import React from "react";
 import { Layout } from "../../components/layaout";
 import ProductList from "../../components/product/productList";
 
-export const Home = () => {
+const Home = () => {
   return (
-    <Layout>
-      {/* Todo el contenido de la página Home */}
-      <ProductList />
-      {/* Más contenido... */}
-    </Layout>
+    <div>
+      <h1>Home Page</h1>
+      {/* Contenido de la página de inicio */}
+    </div>
   );
 };
+
+export default Home;

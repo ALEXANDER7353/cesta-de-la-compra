@@ -1,17 +1,52 @@
 import "./App.css";
-import Pages from "./pages";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-
-import { BaseTheme } from "./theme/base";
-import { BrowserRouter } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
+import Home from "./pages/home";
+import Login from "./pages/Login";
+import Checkout from "./pages/Checkout";
+import OrderSummary from "./pages/OrderSummary";
+import ProtectedRoute from "./components/ProtectedRoute";
+import { AuthProvider } from "./context/AuthContext";
 
 function App() {
   return (
-    <ThemeProvider theme={BaseTheme}>
-      <BrowserRouter>
-        <Pages />
-      </BrowserRouter>
-    </ThemeProvider>
+    <AuthProvider>
+      <Routes>
+        <Route path="/" element={<Navigate to="/login" />} />
+        <Route path="/login" element={<Login />} />
+        <Route
+          path="/home"
+          element={
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/checkout"
+          element={
+            <ProtectedRoute>
+              <Checkout />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/order-summary"
+          element={
+            <ProtectedRoute>
+              <OrderSummary />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/protected"
+          element={
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+    </AuthProvider>
   );
 }
 
