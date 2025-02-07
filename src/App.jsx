@@ -11,7 +11,6 @@ import Header from "./components/layaout/header";
 function App() {
   return (
     <AuthProvider>
-      <Header />
       <Routes>
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/login" element={<Login />} />
@@ -43,6 +42,7 @@ function App() {
           path="/products"
           element={
             <ProtectedRoute>
+              <Header />
               <ProductsList />
             </ProtectedRoute>
           }
