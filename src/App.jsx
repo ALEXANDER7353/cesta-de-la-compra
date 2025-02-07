@@ -6,6 +6,7 @@ import Checkout from "./pages/Checkout";
 import OrderSummary from "./pages/OrderSummary";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { AuthProvider } from "./context/AuthContext";
+import ProductsList from "./components/product/productList";
 
 function App() {
   return (
@@ -38,10 +39,10 @@ function App() {
           }
         />
         <Route
-          path="/protected"
+          path="/products"
           element={
             <ProtectedRoute>
-              <Home />
+              <ProductsList />
             </ProtectedRoute>
           }
         />

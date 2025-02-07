@@ -12,7 +12,7 @@ const Login = () => {
     e.preventDefault();
     const userData = { username, password };
     login(userData);
-    navigate("/protected");
+    navigate("/products");
   };
 
   return (
