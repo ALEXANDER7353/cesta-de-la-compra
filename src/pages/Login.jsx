@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
+import "./Login.css";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { login } = useAuth();
   const navigate = useNavigate();
+  const [isNightMode, setIsNightMode] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -15,8 +17,42 @@ const Login = () => {
     navigate("/products");
   };
 
+  useEffect(() => {
+    const hour = new Date().getHours();
+    const isDayTime = hour > 6 && hour < 19;
+    setIsNightMode(!isDayTime);
+    document.documentElement.style.setProperty(
+      "--background-color",
+      isDayTime ? "white" : " black"
+    );
+    document.documentElement.style.setProperty(
+      "--text-color",
+      isDayTime ? "black" : "white"
+    );
+    document.documentElement.style.setProperty(
+      "--input-text-color",
+      isDayTime ? "lightsteelblue" : "lightsteelblue"
+    );
+    document.documentElement.style.setProperty(
+      "--input-bg-color",
+      isDayTime ? "white" : "white"
+    );
+    document.documentElement.style.setProperty(
+      "--input-border-color",
+      isDayTime ? "lightsteelblue" : "lightsteelblue"
+    );
+    document.documentElement.style.setProperty(
+      "--button-bg-color",
+      isDayTime ? "lightsteelblue" : "lightsteelblue"
+    );
+    document.documentElement.style.setProperty(
+      "--button-text-color",
+      isDayTime ? "black" : "white"
+    );
+  }, []);
+
   return (
-    <div>
+    <div className={`login-container ${isNightMode ? "night-mode" : ""}`}>
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <div>
