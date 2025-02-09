@@ -1,21 +1,35 @@
-import { List, Typography, Box } from "@mui/material";
+import { useContext } from "react";
+import {
+  List,
+  Typography,
+  Box,
+  Button,
+  ListItem,
+  ListItemText,
+} from "@mui/material";
+import { CartContext } from "../../context/CartContext";
 
-// Componente funcional Cart
-// eslint-disable-next-line react/prop-types
 const Cart = () => {
-  // Utilizamos el contexto del carrito
+  const { cart, removeFromCart } = useContext(CartContext);
 
-  // Función para manejar la eliminación de un ítem del carrito
   return (
     <Box sx={{ width: 320, p: 2 }}>
-      {/* Título del carrito */}
       <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
         Carrito de Compras
       </Typography>
       <List>
-        {/* Mapeamos los ítems del carrito para mostrarlos */}
-
-        {/* Mostramos el botón de "Proceder al Pago" si hay ítems en el carrito */}
+        {cart.map((item) => (
+          <ListItem key={item.id}>
+            <ListItemText primary={item.name} secondary={`$${item.price}`} />
+            <Button
+              size="small"
+              color="secondary"
+              onClick={() => removeFromCart(item)}
+            >
+              Eliminar
+            </Button>
+          </ListItem>
+        ))}
       </List>
     </Box>
   );
